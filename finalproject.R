@@ -8,4 +8,15 @@ library(ggplot2)
 
 disease_df <- read.csv("U.S._Chronic_Disease_Indicators__CDI_.csv")
 
-diabetes_df <-filter(us_disease_df, Topic == "Diabetes")
+diabetes_df <-filter(disease_df, Topic == "Diabetes")
+
+diabetes_df <- select(diabetes_df, YearStart, LocationAbbr, LocationDesc, 
+                      Topic, Question, DataValueType, DataValue, 
+                      StratificationCategory1, Stratification1)
+
+food_df <- read.csv("FAOSTAT_data_en_11-26-2023.csv")
+
+
+food_df <- select(food_df, Area, Element, Item, Year, Unit, Value)
+
+df <- left_join(diabetes_df, food_df, by = c("YearStart" = "Year"))
