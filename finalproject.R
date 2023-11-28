@@ -21,4 +21,4 @@ food_df <- read.csv("FAOSTAT_data_en_11-27-2023.csv")
 food_df <- select(food_df, Area, Element, Year, Unit, Grand.Total, Sugar...Sweeteners)
 food_df$sugar_pct <- food_df$Sugar...Sweeteners/food_df$Grand.Total * 100
 
-df <- left_join(diabetes_df, food_df, by = c("YearStart" = "Year"))
+df <- left_join(wa_df, food_df, by = c("YearStart" = "Year"))
