@@ -6,7 +6,7 @@ library(stringr)
 library(plotly)
 
 source("finalproject.R")
-disease_df <- read.csv("diabetes.csv") 
+diabetes_df <- read.csv("diabetes.csv") 
 wa_df <- read.csv("wa_df.csv")
 
 
@@ -31,9 +31,9 @@ analysis_view<-fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("VS WA", h3("Selected State Compared to Washington"),plotOutput(outputId = "plot1")),
-        tabPanel("Gender", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotOutput(outputId = "plot2")),
-        tabPanel("Race", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotOutput(outputId = "plot3"))
+        tabPanel("VS WA", h3("Selected State Compared to Washington"),plotlyOutput(outputId = "plot1")),
+        tabPanel("Gender", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotlyOutput(outputId = "plot2")),
+        tabPanel("Race", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotlyOutput(outputId = "plot3"))
       )
     )
   ),
@@ -72,17 +72,12 @@ server<-function(input, output){
   
   filtered_state <- function(state){
     #filtered table goes here
-    filtered_data <- diabetes_df$DataValue == "Number" & !is.na(diabetes$YearStart), ]
-    filtered_data$DataValue <- as.numeric(as.character(filtered_data$DataValue))
-    selected_data <- filter(filtered_data(LocationDesc == "state_name")
-    
-    
+    selected_data <- filter(diabetes_df, LocationDesc == "state_name")
   }
  
 
-  output$plot1 <- renderPlot({
+  output$plot1 <- renderPlotly({
     #plot goes here
-    
   merged <- full_join(filtered_state, wa_df)
    a <- ggplot(merged, aes(YearStart, DataValue))+
     geom_col(aes(color = YearStart)) +
@@ -94,7 +89,7 @@ server<-function(input, output){
   })
 }
 
-output$plot2 <- renderPlot({
+output$plot2 <- renderPlotly({
     #plot goes here
     gender_df <- filter(filtered_state, StratificationCategory1 == "Gender")
   b <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
@@ -105,9 +100,9 @@ output$plot2 <- renderPlot({
     
     return (b)
   })
-}
+ 
 
-output$plot3 <- renderPlot({
+output$plot3 <- renderPlotly({
     #plot goes here
     race_df <- filter(filtered_state, StratificationCategory1 == "Race/Ethnicity")
   c <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
@@ -118,7 +113,7 @@ output$plot3 <- renderPlot({
     
     return (c)
   })
-}
+
 
 
 shinyApp(ui=ui,server=server)
