@@ -31,9 +31,9 @@ analysis_view<-fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("VS WA", h3("plot1 title"),plotOutput(outputId = "plot1")),
-        tabPanel("Gender", h3("plot2 title"),plotOutput(outputId = "plot2")),
-        tabPanel("Race", h3("plot3 title"),plotOutput(outputId = "plot3"))
+        tabPanel("VS WA", h3("Selected State Compared to Washington"),plotOutput(outputId = "plot1")),
+        tabPanel("Gender", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotOutput(outputId = "plot2")),
+        tabPanel("Race", h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"),plotOutput(outputId = "plot3"))
       )
     )
   ),
