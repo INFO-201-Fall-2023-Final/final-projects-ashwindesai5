@@ -80,9 +80,6 @@ server<-function(input, output){
     
   }
  
-  output$table <-renderTable({
-    return(make_table(input$state_name))
-  })
 
   output$barchart <- renderPlot({
     #plot goes here
