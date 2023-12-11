@@ -99,10 +99,10 @@ output$plot2 <- renderPlot({
     #plot goes here
     gender_df <- filter(selected_df, StratificationCategory1 == "Gender")
   b <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
-    geom_col(aes(color = YearStart)) +
+    geom_col(aes(color = StratificationCategory1)) +
     labs( x = "Year",
          y = "Total Population with Diabetes") +
-    facet_wrap(~LocationDesc)
+    facet_wrap(~StratificationCategory1)
     
     return (b)
   })
