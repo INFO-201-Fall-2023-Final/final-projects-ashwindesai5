@@ -83,7 +83,7 @@ server<-function(input, output){
   output$plot1 <- renderPlot({
     #plot goes here
     
-  merged <- full_join(selected_data, wa_df)
+  merged <- full_join(filtered_state, wa_df)
    a <- ggplot(merged, aes(YearStart, DataValue))+
     geom_col(aes(color = YearStart)) +
     labs( x = "Year",
@@ -96,7 +96,7 @@ server<-function(input, output){
 
 output$plot2 <- renderPlot({
     #plot goes here
-    gender_df <- filter(selected_df, StratificationCategory1 == "Gender")
+    gender_df <- filter(filtered_state, StratificationCategory1 == "Gender")
   b <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
     geom_col(aes(color = StratificationCategory1)) +
     labs( x = "Year",
@@ -109,7 +109,7 @@ output$plot2 <- renderPlot({
 
 output$plot3 <- renderPlot({
     #plot goes here
-    race_df <- filter(selected_df, StratificationCategory1 == "Race/Ethnicity")
+    race_df <- filter(filtered_state, StratificationCategory1 == "Race/Ethnicity")
   c <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
     geom_col(aes(color = StratificationCategory1)) +
     labs( x = "Year",
