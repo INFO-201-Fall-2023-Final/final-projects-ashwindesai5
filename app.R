@@ -26,14 +26,14 @@ analysis_view<-fluidPage(
       selectInput(
         inputId = "state_name",
         label = "Select a state",
-        choices = diseases_df$LocationAbbr #filtered dataframe of choosen state
+        choices = diseases_df$LocationDesc #filtered dataframe of choosen state
       )
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("tab1", h3("plot1 title"),plotOutput(outputId = "plot1")),
-        tabPanel("tab2", h3("plot2 title"),plotOutput(outputId = "plot2")),
-        tabPanel("tab3", h3("plot3 title"),plotOutput(outputId = "plot3"))
+        tabPanel("VS WA", h3("plot1 title"),plotOutput(outputId = "plot1")),
+        tabPanel("Gender", h3("plot2 title"),plotOutput(outputId = "plot2")),
+        tabPanel("Race", h3("plot3 title"),plotOutput(outputId = "plot3"))
       )
     )
   ),
@@ -71,22 +71,26 @@ ui<-navbarPage(
 
 server<-function(input, output){
   
-  make_table <- function(state){
+  filtered_state <- function(state){
     #filtered table goes here
     filtered_data <- diabetes_df$DataValue == "Number" & !is.na(diabetes$YearStart), ]
     filtered_data$DataValue <- as.numeric(as.character(filtered_data$DataValue))
-    filter_data <- filter(filtered_data[filtered_data$DataValueType == "Number" & filtered_data$StratificationCategory1== "Race/Ethnicity" &
-                                        filtered_data$Stratification1 == input$state_name
+    selected_data <- filter(filtered_data(LocationDesc == "state_name")
+    
     
   }
  
 
-  output$barchart <- renderPlot({
+  output$plot1 <- renderPlot({
     #plot goes here
-   p <- ggplot(make_table, aes(YearStart, DataValue))+
+    
+  merged <- full_join(selected_data, wa_df)
+   p <- ggplot(merged, aes(YearStart, DataValue))+
     geom_col(aes(color = YearStart)) +
     labs( x = "Year",
-         y = "Total Population with Diabetes" 
+         y = "Total Population with Diabetes") +
+    facet_wrap(~LocationDesc)
+    
     #return (p)
   })
 }
