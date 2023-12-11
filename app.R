@@ -107,7 +107,19 @@ output$plot2 <- renderPlot({
     return (b)
   })
 }
-                            
+
+output$plot3 <- renderPlot({
+    #plot goes here
+    race_df <- filter(selected_df, StratificationCategory1 == "Race/Ethnicity")
+  c <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
+    geom_col(aes(color = StratificationCategory1)) +
+    labs( x = "Year",
+         y = "Total Population with Diabetes") +
+    facet_wrap(~StratificationCategory1)
+    
+    return (c)
+  })
+}
 
 
 shinyApp(ui=ui,server=server)
