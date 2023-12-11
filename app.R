@@ -37,7 +37,6 @@ analysis_view<-fluidPage(
       )
     )
   ),
-  p("paragraph outside")
 )
 
 summary_view <- fluidPage(
