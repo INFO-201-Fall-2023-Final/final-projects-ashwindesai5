@@ -6,7 +6,7 @@ library(stringr)
 library(plotly)
 
 source("finalproject.R")
-disease_df <- read.csv("U.S._Chronic_Disease_Indicators__CDI_.csv") 
+disease_df <- read.csv("diabetes.csv") 
 wa_df <- read.csv("wa_df.csv")
 
 
@@ -26,7 +26,7 @@ analysis_view<-fluidPage(
       selectInput(
         inputId = "state_name",
         label = "Select a state",
-        choices = diseases_df$LocationDesc #filtered dataframe of choosen state
+        choices = diabetes_df$LocationDesc #filtered dataframe of choosen state
       )
     ),
     mainPanel(
