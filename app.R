@@ -85,15 +85,29 @@ server<-function(input, output){
     #plot goes here
     
   merged <- full_join(selected_data, wa_df)
-   p <- ggplot(merged, aes(YearStart, DataValue))+
+   a <- ggplot(merged, aes(YearStart, DataValue))+
     geom_col(aes(color = YearStart)) +
     labs( x = "Year",
          y = "Total Population with Diabetes") +
     facet_wrap(~LocationDesc)
     
-    #return (p)
+    return (a)
   })
 }
+
+output$plot2 <- renderPlot({
+    #plot goes here
+    gender_df <- filter(selected_df, StratificationCategory1 == "Gender")
+  b <- ggplot(gender_df, aes(YearStart, DataValue, group = StratificationCategory1))+
+    geom_col(aes(color = YearStart)) +
+    labs( x = "Year",
+         y = "Total Population with Diabetes") +
+    facet_wrap(~LocationDesc)
+    
+    return (b)
+  })
+}
+                            
 
 
 shinyApp(ui=ui,server=server)
