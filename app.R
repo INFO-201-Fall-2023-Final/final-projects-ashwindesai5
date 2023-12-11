@@ -2,6 +2,8 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(fmsb)
+library(stringr)
+library(plotly)
 
 source("finalproject.R")
 disease_df <- read.csv("U.S._Chronic_Disease_Indicators__CDI_.csv") 
@@ -71,6 +73,11 @@ server<-function(input, output){
   
   make_table <- function(state){
     #filtered table goes here
+    filtered_data <- diabetes_df$DataValue == "Number" & !is.na(diabetes$YearStart), ]
+    filtered_data$DataValue <- as.numeric(as.character(filtered_data$DataValue))
+    filter_data <- filter(filtered_data[filtered_data$DataValueType == "Number" & filtered_data$StratificationCategory1== "Race/Ethnicity" &
+                                        filtered_data$Stratification1 == input$state_name
+    
   }
  
   output$table <-renderTable({
@@ -79,8 +86,13 @@ server<-function(input, output){
 
   output$barchart <- renderPlot({
     #plot goes here
-    #return ()
+   p <- ggplot(make_table, aes(YearStart, DataValue))+
+    geom_col(aes(color = YearStart)) +
+    labs( x = "Year",
+         y = "Total Population with Diabetes" 
+    #return (p)
   })
 }
+
 
 shinyApp(ui=ui,server=server)
