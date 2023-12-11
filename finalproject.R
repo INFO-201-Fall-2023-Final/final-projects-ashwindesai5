@@ -21,3 +21,7 @@ food_df <- select(food_df, Area, Element, Year, Unit, Grand.Total, Sugar...Sweet
 food_df$sugar_pct <- food_df$Sugar...Sweeteners/food_df$Grand.Total * 100
 
 df <- left_join(wa_df, food_df, by = c("YearStart" = "Year"))
+#This Code is for testing selecte_state and to look at the df for errors
+selected_state <-  filter(diabetes_df, LocationDesc == "Alabama", Stratification1 == "Overall", 
+                          Question == "Hospitalization with diabetes as a listed diagnosis")
+selected_state <- filter(selected_state, !is.na(DataValue))
