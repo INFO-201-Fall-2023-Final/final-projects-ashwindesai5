@@ -6,9 +6,8 @@ library(ggplot2)
 
 # Project Code -----------------------------------------------------------------
 
-disease_df <- read.csv("U.S._Chronic_Disease_Indicators__CDI_.csv")
+disease_df <- read.csv("diabetes.csv")
 
-diabetes_df <-filter(disease_df, Topic == "Diabetes")
 
 diabetes_df <- select(diabetes_df, YearStart, LocationAbbr, LocationDesc, 
                       Topic, Question, DataValueType, DataValue, 
