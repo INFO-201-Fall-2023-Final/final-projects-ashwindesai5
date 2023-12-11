@@ -40,7 +40,15 @@ analysis_view<-fluidPage(
 
 summary_view <- fluidPage(
   h1("Summary"),
-  p("conclusion goes here"),
+  p("From the backgroud study, we obtian that individuals' daily sugar intake 
+    values are siginificantly higher than the FDA’s recommendation(less than 10%). 
+    This is a significant issue for people to draw attentions on. Our study compares 
+    people with different races, gender and regions focused in westcost on the 
+    number of diagnosed diabetes cases. We found out that people in Washington 
+    state have higher diagnosed rate than people who lives in California. 
+    Hispanics have higher rate than overall. Based on the anaylsis, we hypothises 
+    that the reason for these result could be culturally dietary pattern difference 
+    caused by factors of races, genders and regions."),
   p("Data sources:"),
   p("CDC's Division of Population Health (U.S. Chronic Disease Indicators):"),
   p("124 indicators designed for uniform collection and reporting of chronic disease data.
