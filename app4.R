@@ -81,27 +81,15 @@ analysis_view<-fluidPage(
 
     ),
     tabPanel("Gender", 
-             sidebarLayout(
-               sidebarPanel(
-                 h2("Control panel"),
-                 selectInput(
-                   inputId = "gender",
-                   label = "Select a gender",
-                   choices = gender_choice
-                 )
-               ),
-               mainPanel(
-                 h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"), 
-                 plotlyOutput(outputId = "plot2")
-               )
-             ),
+             h3("Comparison of Selected States Diabetic Outcomes in terms of Gender"), 
+             plotlyOutput(outputId = "plot2"),
              p("The bar graph provides a comparative analysis of the annual count 
                of individuals with diabetes, categorized by gender, specifically 
-               focusing on the selected state as specified by the user. The x-axis 
-               represents the chronological progression of years, while the y-axis 
-               depicts the corresponding number of people hospitalized with diabetes 
-               as a listed cause. It is essential to acknowledge the possibility 
-               of missing data for certain years or genders within the chosen state. 
+               focusing on the selected state as specified by the user from provies
+               plot. The x-axis represents the chronological progression of years, 
+               while the y-axis depicts the corresponding number of people hospitalized 
+               with diabetes as a listed cause. It is essential to acknowledge the 
+               possibility of missing data for certain years or genders within the chosen state. 
                In some instances, certain years may not have available data for a 
                particular gender. The graph's interactive functionality allows users 
                to tailor their exploration by selecting a specific state, enabling a 
